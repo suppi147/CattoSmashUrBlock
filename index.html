@@ -1,0 +1,30 @@
+<html>
+    <body>
+        <p id="myParagraph"></p>
+        <Script>
+            fetch('https://api.blockcypher.com/v1/btc/main')
+            .then(response => response.json())
+            .then(data => {
+                fetch(data.latest_url)
+                .then(response => response.json())
+                .then(data => {
+                const html = `
+                <h1>Bitcoin Mainnet Block</h1>
+                <ul>
+                    <li>hash: ${data.hash}</li>
+                    <li>height: ${data.height}</li>
+                    <li>nonce: ${data.nonce}</li>
+                    <li>time: ${data.time}</li>
+                    <li>prev_block: ${data.prev_block}</li>
+                </ul>
+
+                `;
+                document.body.innerHTML = html;
+            })
+            .catch(error => console.error(error));
+            })
+            .catch(error => console.error(error));
+            
+        </Script>
+    </body>
+</html>
